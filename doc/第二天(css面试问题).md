@@ -133,9 +133,15 @@ BFC规定了内部的block Box如何布局
 触发BFC条件
 1. 根元素即html 本身就是BFC
 2. float的值不为none(默认)
-3. overflow的值部位visible(默认)
+3. overflow的值不为visible(默认)
 4. display的值为inline-block,table-cell,table-caption
 5. position的值为absolute和fixed
+
++ Box垂直方向的距离由margin决定,属于同一个BFC的两个相邻Box的margin会发生重叠
+
+![image.png](https://i.loli.net/2021/09/01/UuVz4lLxr16SQf9.png)
+
+![image.png](https://i.loli.net/2021/09/01/1aHxWGIuhRb85VQ.png)
 
 # 14. 设置元素浮动后,该元素的display值是多少?
 
