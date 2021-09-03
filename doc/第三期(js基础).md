@@ -177,6 +177,10 @@ JSON.parse(JSON.stringify(obj)) // {name: 234324}
 
 关于函数的参数为对象时,传参的形式就是浅复制,是引用地址的拷贝,两者还是指向同一个引用地址(基本类型数据是直接拷贝值)
 
++ 基本类型值是存储在栈中的简单数据段，也就是说，他们的值直接存储在变量访问的位置。堆是存放数据的基于散列算法的数据结构，在javascript中，引用值是存放在堆中的。
+
+![image.png](https://i.loli.net/2021/09/02/lCquGexZNQhFMf6.png)
+
 + 修改属性的值还是会通过当前引用地址找到属性值
 
 ![image.png](https://i.loli.net/2021/09/02/GytP7TbAFqNYoHe.png)
