@@ -237,6 +237,8 @@ DNS解析 => TCP连接 => 发送http请求 => 关闭TCP连接 => 浏览器渲染
 3. 第三次握手
 客户端收到 SYN + ACK 报文段。然后 Acknowledgment Number 设置为 y + 1, 向服务器发送 ACK 字段, 这个报文段发送完毕以后, 客户端和服务端都进入 ESTABLISHED 状态, 完成 TCP 三次状态
 
+![1630919634(1)](https://user-images.githubusercontent.com/52627267/132192933-eb1bfe31-d8d5-4d6e-8eff-8a9c0f145366.jpg)
+
 SSL 握手过程
 
 1. 第一阶段
