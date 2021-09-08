@@ -1,4 +1,4 @@
-## 第四期 Promise
+## 第五期 Promise
 
 + [github阅读](https://github.com/azhen98/A-week-to-learn/blob/master/doc/%E7%AC%AC%E4%BA%94%E6%9C%9F(%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Promise).md)
 
