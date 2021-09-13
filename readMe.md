@@ -1,3 +1,7 @@
+## 第七期 微任务, 任务队列
+
++ [github阅读](https://github.com/azhen98/A-week-to-learn/blob/master/doc/%E7%AC%AC%E4%B8%83%E6%9C%9F(%E5%BE%AE%E4%BB%BB%E5%8A%A1%2C%E4%BA%8B%E4%BB%B6%E9%98%9F%E5%88%97).md)
+
 ## 第六期 手写 bind, call
 
 + [github阅读](https://github.com/azhen98/A-week-to-learn/blob/master/doc/%E7%AC%AC%E5%85%AD%E6%9C%9F(%E6%89%8B%E5%86%99).md)
