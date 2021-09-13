@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<style>
+		.btn {
+			display: inline-block;
+			padding: 4px 12px;
+			margin-bottom: 0;
+			font-size: 14px;
+			line-height: 20px;
+			text-align: center;
+			text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.75);
+			vertical-align: middle;
+			cursor: pointer;
+			background-color: #f5f5f5;
+			background-image: linear-gradient(180deg, #fff, #e6e6e6);
+			background-repeat: repeat-x;
+			border: 1px solid rgba(0, 0, 0, 0.15);
+			border-bottom-color: rgba(0, 0, 0, 0.25);
+			border-radius: 4px;
+			box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+		}
+		.btn:hover {
+			background-position: 0 -15px;
+			background-color: #e6e6e6;
+			transition: background-position 0.1s linear;
+		}
+		.btn:focus {
+			outline: thin dotted #333;
+			outline: 5px auto -webkit-focus-ring-color;
+			outline-offset: -2px;
+		}
+		.btn:active {
+			background-image: none;
+			outline: 0;
+			box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+		}
+		.btn-danger {
+			color: #fff;
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+			background-color: #da4f49;
+			background-image: linear-gradient(180deg, #ee5f5b, #bd362f);
+			background-repeat: repeat-x;
+			border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+		}
+		.btn-danger.active,
+		.btn-danger.disabled,
+		.btn-danger:active,
+		.btn-danger:focus,
+		.btn-danger:hover,
+		.btn-danger[disabled] {
+			color: #fff;
+			background-color: #bd362f;
+		}
+		@font-face {
+			font-family: Inconsolata;
+			font-style: normal;
+			font-weight: 400;
+			src: url('/c/inconsolata-1236dbc6.woff') format('woff');
+		}
+		@font-face {
+			font-family: 'PT Serif';
+			font-style: normal;
+			font-weight: 400;
+			src: url('/c/pt-serif-71b5d018.woff2') format('woff2');
+		}
+		html {
+			overflow-y: scroll;
+			background: #f1f1f1;
+			font-size: 15px;
+			font-family: sans-serif;
+			line-height: 1.9;
+		}
+		@media screen and (min-width: 530px) {
+			html {
+				font-size: 16px;
+				color: #444;
+			}
+		}
+		body {
+			padding: 0;
+			-webkit-text-size-adjust: 100%;
+		}
+		body,
+		figure {
+			margin: 0;
+		}
+		canvas,
+		img {
+			max-width: 100%;
+		}
+		p {
+			margin: 1.2em 0;
+		}
+		a:link,
+		a:visited {
+			text-decoration: none;
+			color: #cc2100;
+		}
+		a:active,
+		a:focus,
+		a:hover {
+			color: #ff8f00;
+		}
+		a:active {
+			text-decoration: underline;
+		}
+		svg {
+			overflow: hidden;
+		}
+		.container {
+			max-width: 1066px;
+			background: #fff;
+			margin: 0 auto;
+		}
+		.content-n-side:after,
+		.content-n-side:before,
+		.content-only:after,
+		.content-only:before,
+		.page-width:after,
+		.page-width:before {
+			content: ' ';
+			display: table;
+		}
+		.content-n-side:after,
+		.content-only:after,
+		.page-width:after {
+			clear: both;
+		}
+		.content-n-side,
+		.content-only,
+		.page-width {
+			position: relative;
+			top: -31px;
+			padding: 0 20px;
+		}
+		@media screen and (min-width: 530px) {
+			.content-n-side,
+			.content-only,
+			.page-width {
+				padding: 0 64px 0 32px;
+			}
+		}
+		@media screen and (min-width: 800px) {
+			.content-n-side,
+			.content-only,
+			.page-width {
+				padding: 0 32px;
+			}
+		}
+		.content-n-side > .side {
+			display: none;
+		}
+		@media screen and (min-width: 800px) {
+			.content-n-side > .content {
+				width: 75%;
+				padding-right: 73px;
+				float: left;
+				box-sizing: border-box;
+			}
+			.content-n-side > .side {
+				width: 25%;
+				float: right;
+				display: block;
+			}
+		}
+		.page-width {
+			box-sizing: border-box;
+			max-width: 1066px;
+			margin: 0 auto;
+		}
+		@media screen and (min-width: 800px) {
+			.content-only > .content {
+				width: 68%;
+			}
+		}
+		.site-header {
+			background: #2d2d2d;
+			overflow: hidden;
+		}
+		.site-header > .inner {
+			padding-top: 75px;
+			padding-left: 0;
+		}
+		@media screen and (min-width: 530px) {
+			.site-header > .inner {
+				padding-top: 135px;
+			}
+		}
+		.site-header a:link,
+		.site-header a:visited {
+			color: #fff;
+		}
+		.site-header a:active,
+		.site-header a:hover {
+			color: #fff;
+			text-decoration: underline;
+		}
+		.site-header .title,
+		.site-header .who {
+			background: #009d81;
+			line-height: 1;
+			font-family: 'PT Serif', georgia, serif;
+			display: inline-block;
+			font-size: 1.05rem;
+			padding: 10px 45px 10px 20px;
+		}
+		@media screen and (min-width: 530px) {
+			.site-header .title,
+			.site-header .who {
+				padding: 10px 97px 10px 32px;
+			}
+		}
+		@media screen and (min-width: 1066px) {
+			.site-header .title,
+			.site-header .who {
+				border-radius: 7px 7px 0 0;
+			}
+		}
+		.site-header .who {
+			float: right;
+			padding: 10px 0;
+			background: none;
+			margin-right: 0;
+		}
+		@media screen and (min-width: 530px) {
+			.site-header .who {
+				margin-right: -32px;
+			}
+		}
+		@media screen and (min-width: 800px) {
+			.site-header .who {
+				display: none;
+			}
+		}
+		.article-content h1,
+		.h-1,
+		.who-page > h1 {
+			background: #ff8400;
+			color: #fff;
+			font-family: 'PT Serif', georgia, serif;
+			font-size: 2.5rem;
+			font-weight: 400;
+			line-height: 1.1;
+			margin: 0 0 0 -20px;
+			padding: 7px 20px 13px;
+		}
+		@media screen and (min-width: 530px) {
+			.article-content h1,
+			.h-1,
+			.who-page > h1 {
+				font-size: 3.4rem;
+				padding: 10px 36px 17px 62px;
+				margin-left: -65px;
+				margin-right: -32px;
+			}
+		}
+		@media screen and (min-width: 1066px) {
+			.article-content h1,
+			.h-1,
+			.who-page > h1 {
+				border-radius: 32px 0 0 32px;
+			}
+		}
+		.article-content h2,
+		.h-2,
+		.who-page > section > h1 {
+			background: #009d81;
+			color: #fff;
+			font-family: 'PT Serif', georgia, serif;
+			font-size: 1.6rem;
+			font-weight: 400;
+			line-height: 1;
+			padding: 7px 20px 10px;
+			margin: 35px 0 0 -20px;
+		}
+		@media screen and (min-width: 530px) {
+			.article-content h2,
+			.h-2,
+			.who-page > section > h1 {
+				font-size: 1.9rem;
+				padding: 10px 35px 13px 62px;
+				margin-right: -32px;
+				margin-left: -65px;
+			}
+		}
+		@media screen and (min-width: 1066px) {
+			.article-content h2,
+			.h-2,
+			.who-page > section > h1 {
+				border-radius: 32px 0 0 32px;
+			}
+		}
+		.article-content h3,
+		.h-3 {
+			margin: 27px 0 0;
+			line-height: 1;
+			font-family: sans-serif;
+			font-weight: 700;
+			font-size: 1rem;
+			border-left: 14px solid #ff8400;
+			padding-left: 8px;
+		}
+		@media screen and (min-width: 530px) {
+			.article-content h3,
+			.h-3 {
+				font-size: 1.2rem;
+				border-left: 19px solid #ff8400;
+				padding-left: 12px;
+			}
+		}
+		.h-4,
+		.side > section > h1 {
+			font-weight: 400;
+			font-size: 0.9rem;
+			border-bottom: 1px dotted #ccc;
+			padding-bottom: 3px;
+			margin: 1.4em 0 0;
+			line-height: 1;
+		}
+		.article-date {
+			font-size: 0.8rem;
+			display: block;
+			background: #ffe454;
+			color: #000;
+			padding: 6px 20px 5px;
+			margin: 0 0 0 -20px;
+		}
+		@media screen and (min-width: 530px) {
+			.article-date {
+				padding: 6px 10px 5px 32px;
+				margin-left: -32px;
+				margin-right: -32px;
+			}
+		}
+		.article-content code {
+			font-family: Inconsolata, courier, monospace;
+			background: #eee;
+			padding: 2px 3px;
+			margin: 0 2px;
+			outline: 1px solid #e2e2e2;
+			line-height: 1;
+			white-space: nowrap;
+			display: inline;
+		}
+		.full-figure {
+			margin: 1em -20px;
+			overflow: hidden;
+			background: #eee;
+		}
+		@media screen and (min-width: 530px) {
+			.full-figure {
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+		.full-figure.checked {
+			background: url('/c/check-1ace92fb.png');
+		}
+		.full-figure.blueprint {
+			background: url('/c/graph-tile-37b83be4.png'), radial-gradient(circle farthest-corner, #08d, #002b46) 50%;
+			background-size: 12%, cover;
+		}
+		.full-figure canvas,
+		.full-figure iframe,
+		.full-figure img,
+		.full-figure object,
+		.full-figure svg,
+		.full-figure video {
+			display: block;
+			margin: 0 auto;
+			outline: none;
+		}
+		.full-figure .video {
+			position: relative;
+			padding-top: 56.25%;
+		}
+		.full-figure .video iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		.full-figure .figcaption,
+		.full-figure > figcaption {
+			font-size: 0.8rem;
+			line-height: 1.4;
+			background: #ffe454;
+			color: #000;
+			padding: 6px 20px;
+		}
+		@media screen and (min-width: 530px) {
+			.full-figure .figcaption,
+			.full-figure > figcaption {
+				padding: 6px 10px;
+			}
+		}
+		@media screen and (min-width: 530px) {
+			.max-figure {
+				margin-left: -32px;
+				margin-right: -64px;
+			}
+		}
+		@media screen and (min-width: 530px) {
+			.max-figure .figcaption,
+			.max-figure > figcaption {
+				padding-left: 32px;
+			}
+		}
+		@media screen and (min-width: 800px) {
+			.max-figure {
+				margin-right: -32px;
+			}
+		}
+		h2 + .max-figure {
+			margin-top: 0;
+		}
+		.side {
+			font-size: 0.85rem;
+			font-weight: 400;
+		}
+		.side .icon-list {
+			margin: 1em 0;
+		}
+		.my-big-face {
+			margin-top: 10px;
+		}
+		.my-big-face h1 {
+			position: relative;
+			margin: 0;
+			outline: 10px solid #fff;
+			background: #fff;
+		}
+		.my-big-face img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+		.code-example {
+			background: #2d2d2d;
+			color: #d4d4d4;
+			margin: 1em -20px;
+			padding: 16px 20px;
+			line-height: 1.4;
+			font-size: 1rem;
+			overflow: auto;
+		}
+		@media screen and (min-width: 530px) {
+			.code-example {
+				margin-left: -32px;
+				margin-right: 0;
+				padding-left: 32px;
+				padding-right: 0;
+				font-size: 1.1rem;
+			}
+		}
+		.code-example pre {
+			font-family: Inconsolata, courier, monospace;
+			margin: 0;
+			display: inline-block;
+			padding-right: 16px;
+		}
+		.code-example code {
+			font-family: inherit;
+			background: none;
+			padding: 0;
+			margin: 0;
+			outline: 0;
+			line-height: inherit;
+			white-space: inherit;
+			display: block;
+		}
+		.code-example::selection {
+			text-shadow: none;
+			background: #b3d4fc;
+		}
+		.code-example .namespace {
+			opacity: 0.7;
+		}
+		.code-example .token.comment {
+			color: #ff824a;
+		}
+		.code-example .token.cdata,
+		.code-example .token.doctype,
+		.code-example .token.prolog {
+			color: #6a9955;
+		}
+		.code-example .token.punctuation {
+			color: #d4d4d4;
+		}
+		.code-example .token.boolean,
+		.code-example .token.constant,
+		.code-example .token.deleted,
+		.code-example .token.number,
+		.code-example .token.property,
+		.code-example .token.symbol,
+		.code-example .token.tag {
+			color: #b5cea8;
+		}
+		.code-example .token.attr-name,
+		.code-example .token.builtin,
+		.code-example .token.char,
+		.code-example .token.inserted,
+		.code-example .token.selector,
+		.code-example .token.string {
+			color: #ce9178;
+		}
+		.code-example .language-css .token.string,
+		.code-example .style .token.string,
+		.code-example .token.entity,
+		.code-example .token.operator,
+		.code-example .token.url {
+			color: #d4d4d4;
+		}
+		.code-example .token.atrule,
+		.code-example .token.attr-value,
+		.code-example .token.keyword {
+			color: #c586c0;
+		}
+		.code-example .token.function {
+			color: #dcdcaa;
+		}
+		.code-example .token.important,
+		.code-example .token.regex,
+		.code-example .token.variable {
+			color: #d16969;
+		}
+		.code-example .token.bold,
+		.code-example .token.important {
+			font-weight: 700;
+		}
+		.code-example .token.italic {
+			font-style: italic;
+		}
+		.code-example .token.constant {
+			color: #9cdcfe;
+		}
+		.code-example .token.class-name {
+			color: #4ec9b0;
+		}
+		.code-example .token.interpolation,
+		.code-example .token.parameter {
+			color: #9cdcfe;
+		}
+		.code-example .token.boolean,
+		.code-example .token.punctuation.interpolation-punctuation {
+			color: #569cd6;
+		}
+		.code-example .token.property {
+			color: #9cdcfe;
+		}
+		.code-example .token.selector {
+			color: #d7ba7d;
+		}
+		.code-example .token.tag {
+			color: #569cd6;
+		}
+		.code-example .token.attr-name {
+			color: #9cdcfe;
+		}
+		.code-example .token.attr-value {
+			color: #ce9178;
+		}
+		.code-example .token.entity {
+			color: #4ec9b0;
+			cursor: unset;
+		}
+		.code-example .language-javascript,
+		.code-example .token.namespace {
+			color: #4ec9b0;
+		}
+		.code-example .language-css {
+			color: #ce9178;
+		}
+		.code-example .language-html {
+			color: #d4d4d4;
+		}
+		.code-example .language-html .token.punctuation {
+			color: grey;
+		}
+		.icon-list {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+			gap: 0.5em 0.2em;
+		}
+		.icon-list-item {
+			display: grid;
+			grid-template-columns: 20px 1fr;
+			gap: 0.5em;
+			align-items: center;
+		}
+		.comments {
+			margin-top: 50px;
+		}
+		.post-preview:after,
+		.post-preview:before {
+			content: ' ';
+			display: table;
+		}
+		.post-preview:after {
+			clear: both;
+		}
+		.post-preview h1 {
+			margin-top: 0;
+		}
+		.post-preview h1 a:link,
+		.post-preview h1 a:visited {
+			display: block;
+			color: #fff;
+		}
+		.post-preview h1 a:active,
+		.post-preview h1 a:hover {
+			color: #fff;
+			text-decoration: underline;
+		}
+		.post-preview .preview-image {
+			margin: 20px 0 0;
+		}
+		@media screen and (min-width: 530px) {
+			.post-preview .preview-image {
+				float: left;
+				width: 200px;
+				margin: 5px 20px 20px 0;
+			}
+		}
+		.post-preview .preview-image img {
+			width: 100%;
+			height: auto;
+		}
+		.pagination {
+			overflow: hidden;
+			margin: 2.1em 0;
+			padding: 0;
+		}
+		.pagination li {
+			display: inline;
+		}
+		.pagination .gap,
+		.pagination .next,
+		.pagination .page,
+		.pagination .prev,
+		.pagination a:link,
+		.pagination a:visited {
+			float: left;
+			padding: 0 8px;
+			font-weight: 700;
+			border-right: 1px dotted #a5a5a5;
+		}
+		.pagination .current,
+		.pagination .disabled,
+		.pagination .gap {
+			color: #6e6e6e;
+			font-weight: 400;
+		}
+		.pagination .prev,
+		.pagination a.prev:link,
+		.pagination a.prev:visited {
+			padding-left: 0;
+		}
+		.pagination .next,
+		.pagination a.next:link,
+		.pagination a.next:visited {
+			border: none;
+		}
+		.form-rows {
+			margin: 1em -20px;
+		}
+		@media screen and (min-width: 530px) {
+			.form-rows.max-form {
+				margin-right: -64px;
+			}
+		}
+		@media screen and (min-width: 800px) {
+			.form-rows.max-form {
+				margin-right: -32px;
+			}
+		}
+		.full-figure + .form-rows {
+			margin-top: -1em;
+		}
+		.code-example + .form-rows {
+			margin-top: -1.1em;
+		}
+		@media screen and (min-width: 530px) {
+			.form-rows {
+				margin-left: -32px;
+				margin-right: 0;
+			}
+		}
+		.form-rows .field {
+			display: table-row;
+		}
+		.form-rows .field:nth-child(2n) .label {
+			background: #3cb39d;
+		}
+		.form-rows .field:nth-child(2n) .input {
+			background: #f7f7f7;
+		}
+		.form-rows .label {
+			background: #009d81;
+			color: #fff;
+			vertical-align: middle;
+			display: table-cell;
+			width: 1px;
+			white-space: nowrap;
+			padding: 0.5em 0.5em 0.5em 20px;
+		}
+		@media screen and (min-width: 530px) {
+			.form-rows .label {
+				padding-left: 32px;
+			}
+		}
+		.form-rows .input {
+			background: #ececec;
+			padding: 0 0.5em;
+			display: table-cell;
+		}
+		.form-rows .input,
+		.form-rows .input > * {
+			vertical-align: middle;
+		}
+		.form-rows input[type='range'],
+		.form-rows input[type='text'] {
+			width: 100%;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		.form-rows-inner {
+			display: table;
+			width: 100%;
+		}
+		.quote {
+			margin: 0;
+			border-left: 10px solid #d5d5d5;
+			padding-left: 16px;
+		}
+		.quote > p:last-of-type {
+			margin-bottom: 0;
+		}
+		.warning {
+			background: #bf0000;
+			color: #fff;
+			font-size: 0.8rem;
+			font-weight: 700;
+			padding: 6px 20px 5px;
+			margin: 0 0 0 -20px;
+		}
+		@media screen and (min-width: 530px) {
+			.warning {
+				padding: 6px 10px 5px 32px;
+				margin-left: -32px;
+				margin-right: -32px;
+			}
+		}
+		.warning > :first-child {
+			margin-top: 0;
+		}
+		.warning > :last-child {
+			margin-bottom: 0;
+		}
+		.who-page figure img {
+			display: block;
+			margin: 0 auto;
+		}
+		.who-page .icon-list {
+			margin: 16px 0;
+		}
+		.blog-index .post-preview.first .h-2 {
+			background: #ff8400;
+		}
+		.event-loop-walkthrough {
+			overflow: hidden;
+			max-width: 710px;
+			background: #eee;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-flex-flow: column;
+			flex-flow: column;
+			max-height: 90vh;
+			height: 493px;
+			position: relative;
+			margin: 0 -20px;
+		}
+
+		@media screen and (min-width: 530px) {
+			.event-loop-walkthrough {
+				margin: 0;
+			}
+		}
+
+		.event-loop-walkthrough .code-example {
+			margin: 0;
+			padding: 0 12px;
+			position: relative;
+			top: 60px;
+			-webkit-transform: translateY(-50px);
+			transform: translateY(-50px);
+		}
+
+		.event-loop-walkthrough table {
+			border-collapse: collapse;
+			width: 100%;
+			table-layout: fixed;
+		}
+
+		.event-loop-walkthrough td {
+			padding: 0;
+		}
+
+		.task-queue,
+		.microtask-queue,
+		.js-stack,
+		.event-loop-log {
+			line-height: 1;
+			border-top: 1px solid #fff;
+		}
+
+		.task-queue th,
+		.microtask-queue th,
+		.js-stack th,
+		.event-loop-log th {
+			font-weight: normal;
+			text-align: left;
+			padding: 10px 5px;
+			background: #ddd;
+			vertical-align: top;
+			width: 5.1rem;
+		}
+
+		.event-loop-items {
+			display: -webkit-flex;
+			display: flex;
+			overflow: hidden;
+			padding-left: 5px;
+		}
+
+		.event-loop-rail {
+			position: relative;
+			display: -webkit-flex;
+			display: flex;
+		}
+
+		.event-loop-log .event-loop-items {
+			-webkit-flex-flow: row wrap;
+			flex-flow: row wrap;
+		}
+
+		.event-loop-item {
+			background: #ddd;
+			margin: 5px;
+			padding: 5px;
+			margin-left: 0;
+			opacity: 0;
+			white-space: nowrap;
+		}
+
+		.event-loop-item.active {
+			background-color: #ffdf1e;
+		}
+
+		.event-loop-commentary {
+			pointer-events: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-justify-content: center;
+			justify-content: center;
+			-webkit-align-items: center;
+			align-items: center;
+			font-size: 1.3rem;
+			color: #fff;
+			line-height: 1.2;
+			padding: 0 7%;
+		}
+
+		@media screen and (min-width: 530px) {
+			.event-loop-commentary {
+				font-size: 1.7rem;
+			}
+		}
+
+		.event-loop-commentary-item {
+			background: rgba(0, 0, 0, 0.77);
+			border-radius: 7px;
+			padding: 0.8rem 1.2rem;
+			opacity: 0;
+		}
+
+		.js-source {
+			-webkit-flex: 1;
+			flex: 1;
+			overflow: hidden;
+			position: relative;
+			background: #2d2d2d;
+		}
+
+		.js-source .line-highlight {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 60px;
+			background: rgba(255, 255, 255, 0.2);
+			z-index: 1;
+			opacity: 0;
+			line-height: 1.4;
+			font-size: 1rem;
+			font-family: Inconsolata, monospace;
+		}
+
+		.js-source .line-highlight::before {
+			content: '.Hello';
+			color: transparent;
+		}
+
+		@media screen and (min-width: 530px) {
+			.js-source .line-highlight::before {
+				font-size: 1.1rem;
+			}
+		}
+
+		.event-loop-controls {
+			background: #dddddd;
+			fill: #6d6d6d;
+			padding: 0.6rem;
+			height: 1.7rem;
+			border-top: 1px solid #fff;
+		}
+
+		.event-loop-controls svg {
+			height: 100%;
+			display: block;
+			margin-right: 0;
+			margin-left: auto;
+		}
+
+		.event-loop-walkthrough .prev-btn,
+		.event-loop-walkthrough .next-btn {
+			fill: rgba(0, 0, 0, 0);
+			cursor: pointer;
+		}
+	</style>
+	<body>
+		<div class="event-loop-walkthrough event-loop-walkthrough-1">
+			<div class="js-source">
+				<div class="line-highlight"></div>
+
+				<div class="code-example">
+					<pre
+						class="language-js"
+					><code>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'script start'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'setTimeout'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+			<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'promise1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span>
+			<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'promise2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'script end'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+				</div>
+			</div>
+
+			<table>
+				<tbody>
+					<tr class="task-queue">
+						<th>Tasks</th>
+						<td>
+							<div class="event-loop-items">
+								<div class="event-loop-rail">
+									<div class="event-loop-item">Run script</div>
+									<div class="event-loop-item">setTimeout callback</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="microtask-queue">
+						<th>Microtasks</th>
+						<td>
+							<div class="event-loop-items">
+								<div class="event-loop-rail">
+									<div class="event-loop-item">Promise then</div>
+									<div class="event-loop-item">Promise then</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="js-stack">
+						<th>JS stack</th>
+						<td>
+							<div class="event-loop-items"></div>
+						</td>
+					</tr>
+					<tr class="event-loop-log">
+						<th>Log</th>
+						<td>
+							<div class="event-loop-items">
+								<div class="event-loop-item">script start</div>
+								<div class="event-loop-item">script end</div>
+								<div class="event-loop-item">promise1</div>
+								<div class="event-loop-item">promise2</div>
+								<div class="event-loop-item">setTimeout</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="event-loop-controls">
+				<svg viewBox="0 0 5 2">
+					<path d="M2,0 L2,2 L0,1 z"></path>
+					<path d="M3,0 L5,1 L3,2 z"></path>
+					<path class="prev-btn" d="M0,0 H2.5V2H0z"></path>
+					<path class="next-btn" d="M2.5,0 H5V2H2.5z"></path>
+				</svg>
+			</div>
+			<div class="event-loop-commentary">
+				<div class="event-loop-commentary-item"></div>
+			</div>
+		</div>
+		<!-- <script src="./手写实现/promise.js"></script> -->
+		<!-- <script src="./demo (2).js"></script> -->
+		<!-- <script src="./demo.js"></script> -->
+		<!-- <script src="./bind.js"></script> -->
+		<script>
+			;(function () {
+				function transition(el, obj, duration, easing) {
+					return new Promise(function (resolve, reject) {
+						if (obj.transform) {
+							obj['-webkit-transform'] = obj.transform
+						}
+
+						var objKeys = Object.keys(obj)
+
+						if (duration) {
+							el.style.transitionProperty = objKeys.join()
+							el.style.transitionTimingFunction = easing
+							el.style.transitionDuration = duration + 's'
+							el.offsetLeft // style recalc
+
+							el.addEventListener('transitionend', function te() {
+								el.style.transitionProperty = ''
+								el.style.transitionTimingFunction = ''
+								el.style.transitionDuration = ''
+								resolve()
+								el.removeEventListener('transitionend', te)
+							})
+						} else {
+							resolve()
+						}
+
+						objKeys.forEach(function (key) {
+							el.style.setProperty(key, obj[key])
+						})
+					})
+				}
+
+				function EventLoopAnimation(el) {
+					this._initalState = el
+					this._states = []
+					this._el = el
+					this._queue = Promise.resolve()
+					this._reset()
+				}
+
+				EventLoopAnimation.prototype._reset = function () {
+					var newEl = this._initalState.cloneNode(true)
+					this._tasksShown = 0
+					this._microtasksShown = 0
+					this._tasksRemoved = 0
+					this._microtasksRemoved = 0
+					this._logsShown = 0
+					this._currentPos = 0
+
+					this._el.parentNode.insertBefore(newEl, this._el)
+					this._el.parentNode.removeChild(this._el)
+					this._el = newEl
+					this._taskRail = this._el.querySelector('.task-queue .event-loop-rail')
+					this._microtaskRail = this._el.querySelector('.microtask-queue .event-loop-rail')
+					this._jsStack = this._el.querySelector('.js-stack .event-loop-items')
+					this._log = this._el.querySelector('.event-loop-log .event-loop-items')
+					this._codeBar = this._el.querySelector('.line-highlight')
+					this._codePane = this._el.querySelector('.code-example')
+					this._commentary = this._el.querySelector('.event-loop-commentary-item')
+
+					var onClick = function (event) {
+						var className = event.target.getAttribute('class')
+						if (className === 'prev-btn') {
+							event.preventDefault()
+							if (event.type == 'click') {
+								this.back()
+							}
+						} else if (className === 'next-btn') {
+							event.preventDefault()
+							if (event.type == 'click') {
+								this.forward(true)
+							}
+						}
+					}.bind(this)
+
+					this._el.addEventListener('click', onClick)
+					this._el.addEventListener('mousedown', onClick)
+				}
+
+				EventLoopAnimation.prototype.forward = function (animate) {
+					this._queue = this._queue.then(
+						function () {
+							var state = this._states[this._currentPos]
+							if (!state) return this.goTo(0)
+							this._currentPos++
+							return Promise.all(
+								state.map(function (func) {
+									return func(animate)
+								})
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.goTo = function (pos) {
+					this._queue = this._queue.then(
+						function () {
+							this._reset()
+							while (pos--) {
+								this.forward(false)
+							}
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.back = function () {
+					this._queue = this._queue.then(
+						function () {
+							if (this._currentPos === 0) return this.goTo(this._states.length)
+							return this.goTo(this._currentPos - 1)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.state = function () {
+					this._states.push([])
+					return this
+				}
+
+				EventLoopAnimation.prototype.action = function (func) {
+					this._states[this._states.length - 1].push(func)
+					return this
+				}
+
+				EventLoopAnimation.prototype.pushTask = function (activated) {
+					return this.action(
+						function (animate) {
+							var newTask = this._taskRail.children[this._tasksShown]
+							this._tasksShown++
+
+							if (activated) {
+								newTask.style.backgroundColor = '#FFDF1E'
+							}
+
+							return transition(
+								newTask,
+								{
+									opacity: 1,
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.pushMicrotask = function () {
+					return this.action(
+						function (animate) {
+							var newTask = this._microtaskRail.children[this._microtasksShown]
+							this._microtasksShown++
+
+							return transition(
+								newTask,
+								{
+									opacity: 1,
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.pushStack = function (text) {
+					return this.action(
+						function (animate) {
+							var div = document.createElement('div')
+							div.className = 'event-loop-item'
+							div.textContent = text
+							div.style.backgroundColor = '#FFDF1E'
+							this._jsStack.appendChild(div)
+							return transition(
+								div,
+								{
+									opacity: 1,
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.popStack = function (text) {
+					return this.action(
+						function (animate) {
+							var div = this._jsStack.children[this._jsStack.children.length - 1]
+							return transition(
+								div,
+								{
+									opacity: 0,
+								},
+								0.2 * animate,
+								'ease-in-out'
+							).then(
+								function () {
+									this._jsStack.removeChild(div)
+								}.bind(this)
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.showCodeBar = function () {
+					return this.action(
+						function (animate) {
+							return transition(
+								this._codeBar,
+								{
+									opacity: 1,
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.hideCodeBar = function () {
+					return this.action(
+						function (animate) {
+							return transition(
+								this._codeBar,
+								{
+									opacity: 0,
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.pushLog = function () {
+					return this.action(
+						function (animate) {
+							var newLog = this._log.children[this._logsShown]
+							this._logsShown++
+
+							return transition(
+								newLog,
+								{
+									opacity: 1,
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.moveToLine = function (num) {
+					return this.action(
+						function (animate) {
+							var barHeight = this._codeBar.getBoundingClientRect().height
+
+							return transition(
+								this._codePane,
+								{
+									transform: 'translateY(' + (num - 1) * -barHeight + 'px)',
+								},
+								0.3 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.commentary = function (text) {
+					return this.action(
+						function (animate) {
+							this._commentary.textContent = text
+							return transition(
+								this._commentary,
+								{
+									opacity: 1,
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.hideCommentary = function () {
+					return this.action(
+						function (animate) {
+							return transition(
+								this._commentary,
+								{
+									opacity: 0,
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.activateMicrotask = function () {
+					return this.action(
+						function (animate) {
+							var div = this._microtaskRail.children[this._microtasksRemoved]
+							return transition(
+								div,
+								{
+									'background-color': '#FFDF1E',
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.shiftMicrotask = function () {
+					return this.action(
+						function (animate) {
+							this._microtasksRemoved++
+							var offset
+							var offsetEl = this._microtaskRail.children[this._microtasksRemoved]
+
+							if (offsetEl) {
+								offset = offsetEl.offsetLeft
+							} else {
+								offset = this._microtaskRail.offsetWidth
+							}
+
+							return transition(
+								this._microtaskRail,
+								{
+									transform: 'translateX(' + -offset + 'px)',
+								},
+								0.3 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.activateTask = function () {
+					return this.action(
+						function (animate) {
+							var div = this._taskRail.children[this._tasksRemoved]
+							return transition(
+								div,
+								{
+									'background-color': '#FFDF1E',
+								},
+								0.2 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				EventLoopAnimation.prototype.shiftTask = function () {
+					return this.action(
+						function (animate) {
+							this._tasksRemoved++
+							var offset
+							var offsetEl = this._taskRail.children[this._tasksRemoved]
+
+							if (offsetEl) {
+								offset = offsetEl.offsetLeft
+							} else {
+								offset = this._taskRail.offsetWidth
+							}
+
+							return transition(
+								this._taskRail,
+								{
+									transform: 'translateX(' + -offset + 'px)',
+								},
+								0.3 * animate,
+								'ease-in-out'
+							)
+						}.bind(this)
+					)
+				}
+
+				window.EventLoopAnimation = EventLoopAnimation
+			})()
+
+			new EventLoopAnimation(document.querySelector('.event-loop-walkthrough-1'))
+				.state()
+				.moveToLine(1)
+				.pushTask(true)
+				.pushStack('script')
+				.showCodeBar()
+				.state()
+				.pushLog()
+				.state()
+				.moveToLine(3)
+				.state()
+				.commentary('setTimeout callbacks are queued as tasks')
+				.state()
+				.hideCommentary()
+				.pushTask()
+				.state()
+				.moveToLine(8)
+				.state()
+				.commentary('Promise callbacks are queued as microtasks')
+				.state()
+				.hideCommentary()
+				.pushMicrotask()
+				.state()
+				.moveToLine(15)
+				.state()
+				.pushLog()
+				.state()
+				.hideCodeBar()
+				.popStack()
+				.state()
+				.commentary('At the end of a task, we process microtasks')
+				.state()
+				.hideCommentary()
+				.activateMicrotask()
+				.state()
+				.showCodeBar()
+				.moveToLine(9)
+				.pushStack('Promise callback')
+				.state()
+				.pushLog()
+				.state()
+				.hideCodeBar()
+				.commentary("This promise callback returns 'undefined', which queues the next promise callback as a microtask")
+				.state()
+				.hideCommentary()
+				.pushMicrotask()
+				.state()
+				.popStack()
+				.commentary('This microtask is done so we move onto the next one in the queue')
+				.state()
+				.hideCommentary()
+				.state()
+				.shiftMicrotask()
+				.activateMicrotask()
+				.state()
+				.showCodeBar()
+				.moveToLine(12)
+				.pushStack('Promise callback')
+				.state()
+				.pushLog()
+				.state()
+				.hideCodeBar()
+				.popStack()
+				.shiftMicrotask()
+				.state()
+				.commentary("And that's this task done! The browser may update rendering")
+				.state()
+				.hideCommentary()
+				.state()
+				.shiftTask()
+				.activateTask()
+				.state()
+				.showCodeBar()
+				.moveToLine(4)
+				.pushStack('setTimeout callback')
+				.state()
+				.pushLog()
+				.state()
+				.hideCodeBar()
+				.popStack()
+				.state()
+				.shiftTask()
+				.state()
+				.commentary('fin')
+		</script>
+	</body>
+</html>
