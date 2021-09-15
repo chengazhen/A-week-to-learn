@@ -85,7 +85,7 @@ function test2(config) {
 compose(test, test2)({ config: 'init' }) // {config: 'init', tip: '第一次', tip2: '第二次'}
 ```
 
-可以发现,compose 试一次行将所有逻辑录入, 而拦截器是 可以多次 use 调用传入拦截逻辑, 所以这里不适用 compose
+可以发现,compose 是一次行将所有逻辑录入, 而拦截器是 可以多次 use 调用传入拦截逻辑, 所以这里不适用 compose
 
 核心就是利用 `promise.then` 方法会返回一个 `promise` 对象
 
@@ -170,3 +170,5 @@ promise.then((config) => {
 [MDN 文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
 
 [手写一个 promise](<https://github.com/azhen98/A-week-to-learn/blob/master/doc/%E7%AC%AC%E4%BA%94%E6%9C%9F(%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Promise).md>)
+
+[掘金大佬](https://juejin.cn/post/6844904039608500237#heading-3)
