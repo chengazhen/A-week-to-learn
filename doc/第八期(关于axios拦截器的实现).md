@@ -136,6 +136,16 @@ axios.run = function (config) {
 axios.run({
 	url: 'xxx.com',
 })
+
+// 返回值
+// Promise {<pending>}
+// [[Prototype]]: Promise
+// [[PromiseState]]: "fulfilled"
+// [[PromiseResult]]: Object
+// tip: "第一次"
+// tip2: "第二次"
+// url: "xxx.com"
+
 ```
 
 `currnetPromise.then((res) => { return resolve(res) })` 这里究竟做了什么
