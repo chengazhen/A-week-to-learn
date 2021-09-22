@@ -197,4 +197,60 @@ proxy.name = '李四'
 
 proxy.age = 4545
 ```
+
 遗留问题: 如果属性是对象的话, 依赖收集就会失败, 因为没有做属性判断, 属性为 object 或者基本类型
+
+## 补充深度数据代理
+
+proxy 代理的只是最外层的对象，如果属性也是一个对象那么修改或者访问子属性的属性时是无法监听到的
+
+像这种数据, proxy 代理之后去访问 sub_name 是无法监听到的
+
+```js
+const obj = {
+	name: '张三',
+	age: 123,
+	sub: {
+		sub_name: 'sub',
+	},
+}
+```
+
+深度监听的实现，网上实现方法很多，这里用了自己感觉很不错的一种，也是之前看过的知乎上一篇文章写的，今日刚好用上，只不过找不到当初文章所在有些遗憾
+
+```js
+// 数据深度劫持
+const handler = {
+	set(target, key, value, receiver) {
+		console.log('set==>', target, key, value)
+		return Reflect.set(target, key, value, receiver)
+	},
+	get(target, key, receiver) {
+		// 可以从一开始就直接递归遍历属性是否为 Object 直接生成代理数据, 这里这样做的好处就是当你访问的时候才会代理需要代理的对象，看过一篇文章就说过 vue 里面也是这样代理对象的, 没有采用直接递归
+		if (typeof target[key] === 'object') {
+			target[key] = reactive(target[key])
+		}
+		return Reflect.get(target, key, receiver)
+	},
+}
+
+function reactive(obj) {
+	return new Proxy(obj, handler)
+}
+
+// 原始数据
+const obj = {
+	name: '张三',
+	age: 123,
+	sub: {
+		sub_name: 'sub',
+	},
+}
+
+// 代理数据
+const proxy = new Proxy(obj, handler)
+
+proxy.sub.sub_name = '李四'
+
+proxy.name = 32424
+```
