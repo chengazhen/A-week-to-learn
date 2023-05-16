@@ -183,7 +183,7 @@
       effectStack.push(effectFn)
       console.log('fn===>');
       fn()
-      console.log('fn===>, 此处是无法执行到的, 因为 obj.text = obj.text + 1 会一直导致 fn 函数的执行, 设置值的时候会执行 Effect, 当走到 fn 的时候又会执行 obj.text = obj.text + 1, 又会触发Effect执行, 所以代码逻辑只能走到 fn 这里, 就会进入一个死循环的调用栈, Effect(Effect(Effect()))');
+      console.log('fn===>, 此处是无法执行到的, 因为 obj.text = obj.text + 1 会一直导致 fn 函数的执行, 设置值的时候会执行 Effect, 当走到 fn 的时候又会执行 obj.text = obj.text + 1, 又会触发Effect执行, 所以代码逻辑只能走到 fn 这里, 就会进入一个死循环的调用栈, Effect(Effect(Effect())) , 副作用函数会一直调用副作用函数');
       // 在这里, fn 的执行, 触发了 get 拦截器的执行, get 拦截器内部的逻辑开始执行, deps.add(activeEffect), 副作用函数被收集到依赖中
       // 此处逻辑关联性较强, fn 的执行导致调用栈(此处的调用栈是浏览器的调用栈)又指向了 get 拦截器, 执行完毕之后又开始执行下面的代码
       console.log(fn.name, 'name===>'); // 此处是为了证明代码执行顺序
