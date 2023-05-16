@@ -181,7 +181,9 @@
       cleanUp(effectFn)
       activeEffect = effectFn
       effectStack.push(effectFn)
+      console.log('fn===>');
       fn()
+      console.log('fn===>, 此处是无法执行到的, 因为 obj.text = obj.text + 1 会一直导致 fn 函数的执行, 设置值的时候会执行 Effect, 当走到 fn 的时候又会执行 obj.text = obj.text + 1, 又会触发Effect执行, 所以代码逻辑只能走到 fn 这里, 就会进入一个死循环的调用栈, Effect(Effect(Effect()))');
       // 在这里, fn 的执行, 触发了 get 拦截器的执行, get 拦截器内部的逻辑开始执行, deps.add(activeEffect), 副作用函数被收集到依赖中
       // 此处逻辑关联性较强, fn 的执行导致调用栈(此处的调用栈是浏览器的调用栈)又指向了 get 拦截器, 执行完毕之后又开始执行下面的代码
       console.log(fn.name, 'name===>'); // 此处是为了证明代码执行顺序
@@ -250,18 +252,23 @@
 
 
   // 这样会导致 ok 和 text 属性都会和 effect 绑定, 但是按理说 只有 obj.ok 的值改变 text 的值才会做出改变
-  effect(function effect1() {
-    console.log('effect');
-    effect(function effect2() {
-      console.log('effect2');
-      obj.text
-    })
-    obj.ok
-  })
+  // effect(function effect1() {
+  //   console.log('effect');
+  //   effect(function effect2() {
+  //     console.log('effect2');
+  //     obj.text
+  //   })
+  //   obj.ok
+  // })
 
   // 修改 obj.ok 的时候, 就会输出
   // effect, effect2, 因为 effect2 在 effect1 里面所以会执行一次
-  obj.ok = true
+  // obj.ok = true
+
+effect(() => {
+  obj.text = obj.text + '1'
+})
+
 
 
 })()
